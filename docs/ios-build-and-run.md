@@ -99,4 +99,4 @@ Use the worktree path shown above.
 
 Simulator build is validated.
 
-Real iPhone deployment may still require additional signing / Apple Developer account setup and can be handled later.
+Real iPhone deployment uses separate free-signing steps documented in [`ios-free-signing.md`](ios-free-signing.md).
