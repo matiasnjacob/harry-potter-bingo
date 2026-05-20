@@ -5,30 +5,68 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(alignment: .leading, spacing: 20) {
-                Text("Oli Harry Potter Bingo")
-                    .font(.largeTitle.bold())
+            List {
+                Section("Current draw") {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(session.currentCard?.title ?? "No card drawn yet")
+                            .font(.title2.weight(.semibold))
 
-                Text("SwiftUI shell ready for native gameplay, card assets, and local session state.")
-                    .font(.body)
-                    .foregroundStyle(.secondary)
-
-                VStack(alignment: .leading, spacing: 12) {
-                    Label("Cards available for import: \(session.availableCardCount)", systemImage: "square.grid.3x3")
-                    Label("Session status: \(session.statusText)", systemImage: "wand.and.stars")
-                    Label("Asset source folder: ios/source-assets", systemImage: "photo.stack")
+                        Text(session.currentCard?.assetName ?? "Tap draw to begin the session.")
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(.vertical, 4)
                 }
-                .font(.headline)
 
-                Spacer()
+                Section("Session status") {
+                    Label("Cards available: \(session.availableCardCount)", systemImage: "square.grid.3x3")
+                    Label("Cards remaining: \(session.remainingCardsCount)", systemImage: "number")
+                    Label("Session status: \(session.statusText)", systemImage: "wand.and.stars")
+                    Label("History count: \(session.drawnCards.count)", systemImage: "list.number")
+                }
 
-                Text("Placeholder content")
-                    .font(.title3.weight(.semibold))
-                Text("Next steps: import normalized cards into the asset catalog, wire up session flow, and replace this shell with bingo board navigation.")
-                    .foregroundStyle(.secondary)
+                Section("Actions") {
+                    Button(session.primaryActionTitle) {
+                        session.handlePrimaryAction()
+                    }
+                    .buttonStyle(.borderedProminent)
+
+                    Button("Reset Progress", role: .destructive) {
+                        session.requestResetConfirmation()
+                    }
+                    .disabled(!session.hasDrawnCards)
+                }
+
+                Section("Draw history") {
+                    if session.drawnCards.isEmpty {
+                        Text("No cards drawn yet.")
+                            .foregroundStyle(.secondary)
+                    } else {
+                        ForEach(Array(session.drawnCards.enumerated()), id: \.element.id) { index, card in
+                            HStack {
+                                Text("#\(index + 1)")
+                                    .font(.headline.monospacedDigit())
+                                VStack(alignment: .leading) {
+                                    Text(card.title)
+                                    Text(card.assetName)
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                }
+                            }
+                        }
+                    }
+                }
             }
-            .padding(24)
             .navigationTitle("MVP Shell")
+            .alert("Reset session?", isPresented: $session.isResetConfirmationPresented) {
+                Button("Cancel", role: .cancel) {
+                    session.cancelReset()
+                }
+                Button("Reset", role: .destructive) {
+                    session.confirmReset()
+                }
+            } message: {
+                Text("This will clear the current draw history and start a new 26-card session.")
+            }
         }
     }
 }
