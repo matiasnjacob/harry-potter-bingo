@@ -2,6 +2,8 @@
 
 `OliHarryPotterBingo.xcodeproj` is the native SwiftUI iPhone app shell for the project.
 
+Build and run steps are documented in [`../docs/ios-build-and-run.md`](../docs/ios-build-and-run.md).
+
 ## Structure
 
 - `OliHarryPotterBingo/App/`: app entry point
