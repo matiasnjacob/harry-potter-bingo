@@ -26,6 +26,16 @@ struct ContentView: View {
                         .frame(maxWidth: .infinity)
                         .disabled(isAnimatingDraw)
 
+                        NavigationLink {
+                            HistoryView()
+                                .environmentObject(session)
+                        } label: {
+                            Label("Open History", systemImage: "list.bullet.rectangle.portrait")
+                                .frame(maxWidth: .infinity)
+                        }
+                        .buttonStyle(.bordered)
+                        .disabled(isAnimatingDraw)
+
                         Button("Reset Progress", role: .destructive) {
                             session.requestResetConfirmation()
                         }
@@ -74,6 +84,16 @@ struct ContentView: View {
                 .padding(20)
             }
             .navigationTitle("Oli Harry Potter Bingo")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink {
+                        HistoryView()
+                            .environmentObject(session)
+                    } label: {
+                        Label("History", systemImage: "clock.arrow.trianglehead.counterclockwise.rotate.90")
+                    }
+                }
+            }
             .alert("Reset session?", isPresented: $session.isResetConfirmationPresented) {
                 Button("Cancel", role: .cancel) {
                     session.cancelReset()
@@ -182,6 +202,49 @@ struct ContentView: View {
             animationCard = nil
             isAnimatingDraw = false
         }
+    }
+}
+
+private struct HistoryView: View {
+    @EnvironmentObject private var session: AppSession
+
+    var body: some View {
+        List {
+            Section("Verification summary") {
+                Label("Cards drawn: \(session.drawnCards.count)", systemImage: "checklist")
+                Label("Cards remaining: \(session.remainingCardsCount)", systemImage: "square.stack.3d.up")
+                Label("Session status: \(session.statusText)", systemImage: "wand.and.stars")
+            }
+
+            Section("Ordered draw history") {
+                if session.drawnCards.isEmpty {
+                    ContentUnavailableView(
+                        "No cards drawn yet",
+                        systemImage: "list.bullet.rectangle",
+                        description: Text("Draw cards from the main screen to build a verification history.")
+                    )
+                } else {
+                    ForEach(Array(session.drawnCards.enumerated()), id: \.element.id) { index, card in
+                        VStack(alignment: .leading, spacing: 6) {
+                            HStack {
+                                Text("Draw #\(index + 1)")
+                                    .font(.headline.monospacedDigit())
+                                Spacer()
+                                Text(card.assetName)
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                            }
+
+                            Text(card.title)
+                                .font(.title3.weight(.semibold))
+                        }
+                        .padding(.vertical, 4)
+                    }
+                }
+            }
+        }
+        .navigationTitle("History")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
