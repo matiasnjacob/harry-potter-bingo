@@ -12,10 +12,14 @@ struct ContentView: View {
                     VStack(spacing: 12) {
                         Text(isAnimatingDraw ? "Shuffling the deck..." : session.statusText)
                             .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                    }
 
-                    cardDisplay
+                        CardArtworkView(card: displayedCard)
+                            .animation(.easeInOut(duration: 0.12), value: displayedCard?.id)
+
+                        if isAnimatingDraw {
+                            ProgressView()
+                        }
+                    }
 
                     VStack(spacing: 12) {
                         Button(primaryButtonTitle) {
@@ -117,39 +121,6 @@ struct ContentView: View {
         }
 
         return session.primaryActionTitle
-    }
-
-    private var cardDisplay: some View {
-        VStack(spacing: 14) {
-            Text(displayedCard?.title ?? "Ready to Draw")
-                .font(.system(size: 32, weight: .bold, design: .rounded))
-                .multilineTextAlignment(.center)
-                .minimumScaleFactor(0.75)
-
-            Text(displayedCard?.assetName ?? "Tap the button below for a slot-machine-style reveal")
-                .font(.headline)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-
-            if isAnimatingDraw {
-                ProgressView()
-                    .progressViewStyle(.circular)
-                    .tint(.white)
-            }
-        }
-        .frame(maxWidth: .infinity, minHeight: 260)
-        .padding(24)
-        .background(
-            LinearGradient(
-                colors: [Color.blue, Color.indigo],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            ),
-            in: RoundedRectangle(cornerRadius: 28, style: .continuous)
-        )
-        .foregroundStyle(.white)
-        .shadow(color: .black.opacity(0.12), radius: 18, y: 10)
-        .animation(.easeInOut(duration: 0.12), value: displayedCard?.id)
     }
 
     private func statCard(title: String, value: String, systemImage: String) -> some View {
