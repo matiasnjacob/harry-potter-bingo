@@ -17,6 +17,8 @@
 		A1B2C3D41E00000000000018 /* CardDrawEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D41E00000000000028 /* CardDrawEngine.swift */; };
 		A1B2C3D41E00000000000019 /* BingoSessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D41E00000000000029 /* BingoSessionStore.swift */; };
 		A1B2C3D41E0000000000001A /* AppSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D41E0000000000002A /* AppSessionTests.swift */; };
+		A1B2C3D41E0000000000001B /* CardArtworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D41E0000000000002C /* CardArtworkView.swift */; };
+		A1B2C3D41E0000000000001C /* cards in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D41E0000000000002D /* cards */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +44,8 @@
 		A1B2C3D41E00000000000029 /* BingoSessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BingoSessionStore.swift; sourceTree = "<group>"; };
 		A1B2C3D41E0000000000002A /* AppSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSessionTests.swift; sourceTree = "<group>"; };
 		A1B2C3D41E0000000000002B /* OliHarryPotterBingoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OliHarryPotterBingoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1B2C3D41E0000000000002C /* CardArtworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardArtworkView.swift; sourceTree = "<group>"; };
+		A1B2C3D41E0000000000002D /* cards */ = {isa = PBXFileReference; lastKnownFileType = folder; name = cards; path = source-assets/cards; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +99,7 @@
 		A1B2C3D41E00000000000032 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A1B2C3D41E0000000000002C /* CardArtworkView.swift */,
 				A1B2C3D41E00000000000022 /* ContentView.swift */,
 			);
 			path = Views;
@@ -123,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				A1B2C3D41E00000000000025 /* Assets.xcassets */,
+				A1B2C3D41E0000000000002D /* cards */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -234,6 +240,7 @@
 			files = (
 				A1B2C3D41E00000000000015 /* Assets.xcassets in Resources */,
 				A1B2C3D41E00000000000016 /* Preview Assets.xcassets in Resources */,
+				A1B2C3D41E0000000000001C /* cards in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1B2C3D41E00000000000011 /* OliHarryPotterBingoApp.swift in Sources */,
+				A1B2C3D41E0000000000001B /* CardArtworkView.swift in Sources */,
 				A1B2C3D41E00000000000012 /* ContentView.swift in Sources */,
 				A1B2C3D41E00000000000013 /* BingoCard.swift in Sources */,
 				A1B2C3D41E00000000000017 /* BingoSessionSnapshot.swift in Sources */,
