@@ -45,6 +45,10 @@ final class AppSession: ObservableObject {
         snapshot.drawnCardIDs.compactMap { cardLookup[$0] }
     }
 
+    var remainingCards: [BingoCard] {
+        snapshot.remainingCardIDs.compactMap { cardLookup[$0] }
+    }
+
     var remainingCardsCount: Int {
         snapshot.remainingCount
     }
