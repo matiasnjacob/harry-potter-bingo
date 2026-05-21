@@ -206,8 +206,7 @@ private struct HistoryView: View {
                                     .foregroundStyle(.secondary)
                             }
 
-                            Text(card.title)
-                                .font(.title3.weight(.semibold))
+                            CardArtworkImageView(card: card, maxHeight: 220)
                         }
                         .padding(.vertical, 4)
                     }
