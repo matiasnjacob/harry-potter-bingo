@@ -4,6 +4,8 @@
 
 Build and run steps are documented in [`../docs/ios-build-and-run.md`](../docs/ios-build-and-run.md).
 
+Direct iPhone install steps are documented in [`../docs/ios-free-signing.md`](../docs/ios-free-signing.md).
+
 ## Structure
 
 - `OliHarryPotterBingo/App/`: app entry point
